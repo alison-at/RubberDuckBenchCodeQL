@@ -1,0 +1,6 @@
+name: my-python-queries
+version: 0.0.1
+language: python
+dependencies:
+  # The *only* pack needed to include the standard libraries and RemoteFlowSources
+  codeql/python-all: "*"
