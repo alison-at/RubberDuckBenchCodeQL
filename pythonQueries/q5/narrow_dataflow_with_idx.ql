@@ -36,8 +36,19 @@ private module SmallDataFlow implements DataFlow::ConfigSig {
 
             and a.getObject().toString().matches("%environment%")
             and c.getLocation().toString().matches("%corpus_pruning_task%")
-            and r.getASubExpression().toString().matches("%eval%")
             and f.toString().matches("%get_value%")
+             //this line limits the output to one path, otherwise there are multiple dataflow paths which could return to build_directory. These are interpretable, but more complex to seperate out. 
+            and r.getASubExpression().toString().matches("default_value")
+        )
+        //need to conflate dataflow and control flow to equate default_value to value_string
+        or exists(If ifs, Expr cond, Return r |
+                cond = ifs.getTest() and
+                cond.contains(source.asExpr()) and
+                ifs.contains(r) and
+
+                sink.asExpr() = r.getASubExpression()
+
+                and r.getASubExpression().toString().matches("%default_value%")
         )
     }
 }

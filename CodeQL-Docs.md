@@ -69,11 +69,16 @@ Calls, Parameters, and Attributes. The Controlflow graph and Dataflow graph is s
 - For some AST nodes, there is a ControlFlowNode. For some, there is not: https://github.com/github/codeql/blob/5523b5e25f01c4bb3183d8286a2fd7194807566c/python/ql/lib/semmle/python/AstExtended.qll#L22
 
 ## Java
-BinaryExpr
----
+__BinaryExpr__
 -  Java CodeQL BinaryExprs are expressions with logical operators.
 - BinaryExpr.getOp() = BinaryExpr.getOp() does not compare the operators for the same symbol, BinaryExpr.getOp().toString() = BinaryExpr.getOp().toString()
 
-AST Graph
----
+__AST Graph__
+
 - In the AST parser, an object method call like `<object>.<method>` is understood as a VarAccess with a nested MethodCall.
+
+## CodeQL Run Guide
+
+If I use the VSCode CodeQL extension with the GUI and click-through capability, I need to reload my VSCode window or else I get an error:
+    A fatal error occurred: Error initializing the IMB disk cache: the cache directory is already locked by another running process. Only one instance of the IMB can access a cache directory at a time.(eventual cause: OverlappingFileLockException)
+There may be a more direct way to clear the cache between switching tools. 
